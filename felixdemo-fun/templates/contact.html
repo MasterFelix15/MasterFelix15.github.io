@@ -1,0 +1,73 @@
+<div class="row top-padding1">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="hd2">Found a bug? Or something of interest?</div>
+        <div class="hd2">Shoot me an email!</div>
+
+    </div>
+</div>
+
+<div id="feedback-form" class="form-group pg-start bottom-padding2" onchange="validate()">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            <label class="lbl-special" for="name">
+                Preferred Name:
+                <span id="name-alert" class="alert1">name too short</span>
+            </label>
+            <input type="text" class="form-control bottom-padding2" id="name" name="name">
+        </div>
+
+        <div class="col-md-5">
+            <label class="lbl-special" for="email">
+                Preferred Email:
+                <span id="email-alert" class="alert1">email invalid</span>
+            </label>
+            <input type="text" class="form-control bottom-padding2" id="email" name="email">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <label class="lbl-special" for="message">
+                Your Message:
+                <span id="message-alert" class="alert1">message too short</span>
+            </label>
+            <textarea class="form-control pg-end" rows="10" id="message" name="message"></textarea>
+            <input id="message-submit" type="submit" class="btn-special bottom-padding2" onclick="submit()">
+        </div>
+    </div>
+</div>
+
+<!-- Warning Modal -->
+<div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="warningModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="warningModelLabel">Warning</h5>
+            </div>
+            <div class="modal-body">
+                Sending message through our server is currently not available, proceeding with submitting will open your local default email application.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="sendMail()">Acknowledge & Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModelLabel">Error</h5>
+            </div>
+            <div class="modal-body">
+                Field requirements not met, please check again.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

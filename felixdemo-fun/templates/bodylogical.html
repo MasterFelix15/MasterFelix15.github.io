@@ -1,0 +1,64 @@
+<div class="row top-padding1 bottom-padding2">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="hd1">Bodylogical</div>
+
+        <div class="hd2">Introduction</div>
+        <div class="bd1">
+            Bodylogical™ is a healthcare product under PwC’s DoubleJump Health™, the purpose of this project is to explore and to provide an appropriate solution for 3D data visualization of human health measured by BMI.
+        </div>
+        <div class="bd1">
+            This project is inspired by a web app presenting the timeline of middle-east protest , as it is very intuitive in a way that people can “travel through time” by scrolling the mouse wheel and view what happened at a specific time and place. The idea can be migrated and applied to human health simulation so that the user can input their current health condition and sort of “foresee” their health condition at a later age.
+        </div>
+
+        <div class="hd2">Useful Links</div>
+        <div class="bd1">
+            Github: <a href="https://github.com/MasterFelix15/Bodylogical">https://github.com/MasterFelix15/Bodylogical</a>
+        </div>
+        <div class="bd1">
+            Live Demo: <a href="http://138.197.222.62/">http://138.197.222.62/</a>
+        </div>
+
+        <div class="hd2">Dev Log</div>
+        <div class="hd3">Week 1 (01/22/2017 ~ 01/28/2017):</div>
+        <div class="bd1">Learn to use WebGL: WebGL is the ideal (and pretty much the only) choice for constructing 3D scene on a webpage that works on every mainstream web browser.</div>
+        <div class="bd1">Study previous developer’s code: The previous developer already has a working simulation animation. It is important to read and try to comprehend what the previous developer has already done so that it is not necessary to start from scratch.</div>
+        <div class="bd1">Choose external library: While WebGL provides the platform to realize 3D-scene rendering and animation, it does not provide the specific ways to construct the scene or objects in the scene. The implementation would be extremely hard without a decent 3D library. My final choice goes to THREE.js, it is a very well-written library with tons of examples and documentation.</div>
+        <div class="bd1">Choose cloud server: DigitalOcean was chosen to host the demo site as it is relatively cost-efficient and reliable. </div>
+        <div class="bd1">Implementation: The separation of the core functionality and parameters is critical for maintenance and further development purposes. The core functionality is reimplemented in this fashion so that it is now able to render a complete scene by simply specifying a set of parameters. This design is superior in the sense that it is more flexible when producing a simulation animation as the change of parameters can be reflected in the animation in real time and that it is potentially capable to provide a much smoother user experience.</div>
+        <div class="bd1">Problems encountered: The current rendering algorithm is not fast enough to render 30 frames per second. It can introduce hiccups when producing an animation.</div>
+
+        <div class="hd3">Week 2 (01/29/2017 ~ 02/04/2017):</div>
+        <div class="bd1">Optimize rendering algorithm: Optimizing algorithm seems really critical at this point, because as mentioned in last week’s problem section, the current algorithm is not fast enough to create a real time animation at even 30fps. The original plan is to make use of the core function and render the whole thing once every frame with the given set of parameters for that frame, which can be calculated very fast once per frame. It turned out to be not practical as the time it takes to do a complete rendering is much more than 1/30 seconds, and varies depending on the machine on which the web app is run. The solution to this is to make use of the built-in animation instead of rendering the whole thing. It can be a bit less flexible but way faster than before, as it is told to only update the pixels that changes. Now it is able to run at 60fps on nearly all modern devices (mobile devices included).</div>
+        <div class="bd1">Adopt keyboard control: using keyboard control is a fast and easy way for THE DEVELOPER to interact with the product in an early stage of development. The effort of implementing the keyboard control is minimised as it does not require any graphics. However, it is only a temporary solution. </div>
+        <div class="bd1">Implement graphic user interface: After the functionalities are verified with keyboard control, and provided that there will be a live demo happening next week to PwC personal, it is now time to implement a nice graphic user interface for users to adjust the parameters in a very intuitive way. The built-in GUI library of THREE.js is an ideal choice as it offers clean and minimal interface and allows complicated functions like scroll bars for changing parameters at the same time. (the keyboard control is suspended upon the completion of GUI)</div>
+        <div class="bd1">Explore new possibilities: Given that everything is completed quite efficiently, and the meeting with the personal from PwC is yet to come, there is not much to do to improve the product at this point. There are however, a few possible directions to go about in the future. The first possibility is that it can be implemented into VR for google cardboard and similar products, however the advantage of having the simulation in VR is not clear. The second possibility is to integrate different input devices with the product, APIs are found to integrate leap motion with WebGL and THREE.js. This can be used for more complicated operations, but it kind of conflict with the original purpose of the product as a personal healthcare utility on mostly mobile devices. </div>
+        <div class="bd1">Problems encountered: the shading for the curved plane does not seem very correct.</div>
+
+        <div class="hd3">Week 3 (02/05/2017 ~ 02/11/2017):</div>
+        <div class="bd1">Demo: A demo to PwC personnel took place on 02/07/2017, 10 am at Atkinson Hall room 2004. Weekly meetings from week 4 to week 7 is set up on every Thursday 9 am.</div>
+        <div class="bd1">Attempt to fix the shading issue: It is discovered during last week that the shading of the curved plane is not correct. It is later discovered that the problem is caused by incorrect normal calculation of the plane vertices. As when the plane is first initialized, normal of  each vertex is calculated based on the initial plane parameters. However, as the plane is evolving itself from frame to frame, the vertices have shifted position while their normal remain unchanged. However, it seems that the plane geometry is not designed to be dynamically calculating its normal, and it does not provide an explicit way to update the normal of vertices. Effort has been made to access and modify the buffer for vertex buffers, but nothing has worked out so far.</div>
+
+        <div class="hd3">Week 4 (02/12/2017 ~ 02/18/2017):</div>
+        <div class="bd1">Attempt to fix the shading issue: More extreme approaches have been taken to try to solve the issue because of last week’s failure. One of the attempts is to destroy the plane instance and rebuild it every frame to force it to recalculate the vertex normal buffer. This approach proved to work, at a very heavy cost of computation power. Initially the webpage can be run at 60 frames per second on almost all the devices that I have access to. Now, it can only run at 20 fps on my laptop and 9 fps on my android phone, thus this approach is not successful. The second approach is instead of drawing a huge plane with 100 * 100 vertices, drawing 100*100 minor planes with only 4 vertices, the idea of this approach is that for all the small planes, the shading would work correctly because although we are updating their positions and orientations, they remain statically as simple rectangular planes instead of the original complicated plane, which theoretically will not introduce the previous problem. This approach proves to work, but it didn’t perform as expected because there does not seem to be a way to do the smooth rendering between different planes. This approach will not be taken if better approaches could be found. </div>
+
+        <div class="hd3">Week 5 (02/19/2017 ~ 02/25/2017):</div>
+        <div class="bd1">Received instructions from PwC: an email containing a set of user input has been received and I have started to modify my current website to meet PwC’s requirements. New UI options have been adopted for the user to control the sleeping hours, daily steps, calorie intake. New elements regarding the personal information of the user will be added in a later phase of development. </div>
+        <div class="bd1">Setup phone call with PwC for future development plan: on the weekly call with PwC, the future development plan is discussed. The current problem we are facing is that it takes too long to request data from the server to support a smooth user experience. Thus we need to pre-populate a database of all the possible user cases and let the website request data from the database to render an animation in real time. </div>
+
+        <div class="hd3">Week 6 (02/26/2017 ~ 03/04/2017):</div>
+        <div class="bd1">Begin to build “fetcher”: “fetcher” is a command line program written in Python in order to send requests to the PwC server in parallel, process the results, and populate my database in one motion. It would be deployed to my cloud server upon completion. </div>
+        <div class="bd1">“Writer”: It is a key component of “fetcher”, it is responsible for reading in the JSON request template and complete it with different information based on specific user cases.</div>
+        <div class="bd1">“Talker”: It is the component of “fetcher” which is in charge of testing connection with the PwC server, sending generated requests submitted by “Writer” and receive the response.</div>
+        <div class="bd1">“Parser”: It is the component of “fetcher” whose purpose is to process the raw response file into useful data.</div>
+        <div class="bd1">“Keeper”: It is the component of “fetcher” for storing the data from “Parser” and store them locally as text files. </div>
+
+        <div class="hd3">Week 7 (03/05/2017 ~ 03/11/2017):</div>
+        <div class="bd1">Begin to build “fetcherDB”: “fetcherDB” is a database implemented with MySQL and deployed on my cloud server. Its job is to host the massive amount of data retrieved by “fetcher” and report to the website. The current table consists the following columns: BMI index, time, sleep hours, daily steps and calorie intake. More columns regarding the specific user will be added in a later development phase.</div>
+        <div class="bd1">“Manager”: it is a component of “fetcher” which is responsible for organizing data and send them to “fetcherDB”.</div>
+
+        <div class="hd3">Week 8 (03/12/2017 ~ 03/18/2017):</div>
+        <div class="bd1">Integration: building bridges between fetcher and the main website. Swapped the original dummy path function with real data. It was discovered that as the website is purely implemented in JavaScript, it is not able to directly connect with the database and request data from there. There are two ways to solve this problem. The first one is to rewrite the website using the NodeJS framework, which can ultimately benefit later development quite much as NodeJS is a server side framework which is a lot more powerful than pure JavaScript. However this requires much more time than I currently have before this quarter ends. The second method is hybrid the website with one PHP scripts and use this PHP script to request data from the database. It is really hacky way, but people have done that, so I am trying to get this to work. </div>
+        <div class="bd1">Demo: the summary demo took place on Friday 03/17/2017, it was overall successful, however it is also discovered when preparing that a more precise dataset would be needed to produce a high quality animation.</div>
+
+    </div>
+</div>
