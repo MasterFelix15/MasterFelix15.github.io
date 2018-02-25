@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bodylogical Demo</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+
+	<body>
+		<div id="container"></div>
+		<script src="js/libs/three.min.js"></script>
+		<script src="js/libs/controls/OrbitControls.js"></script>
+		<script src="js/Detector.js"></script>
+		<script src="js/libs/stats.min.js"></script>
+		<script src="js/libs/dat.gui.min.js"></script>
+		<script src="js/Gui.js"></script>
+		<script src="js/Mesh.js"></script>
+
+
+		<script type="x-shader/x-vertex" id="vertexshader">
+			uniform float amplitude;
+			attribute float displacement;
+			varying vec3 vNormal;
+			varying vec2 vUv;
+			void main() {
+				vNormal = normal;
+				vUv = ( 0.5 + amplitude ) * uv + vec2( amplitude );
+				vec3 newPosition = position + amplitude * normal * vec3( displacement );
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
+			}
+		</script>
+
+		<script type="x-shader/x-fragment" id="fragmentshader">
+			varying vec3 vNormal;
+			varying vec2 vUv;
+			uniform vec3 color;
+			uniform sampler2D texture;
+			void main() {
+				vec3 light = vec3( 0.5, 0.2, 1.0 );
+				light = normalize( light );
+				float dProd = dot( vNormal, light ) * 0.5 + 0.5;
+				vec4 tcolor = texture2D( texture, vUv );
+				vec4 gray = vec4( vec3( tcolor.r * 0.3 + tcolor.g * 0.59 + tcolor.b * 0.11 ), 1.0 );
+				gl_FragColor = gray * vec4( vec3( dProd ) * vec3( color ), 1.0 );
+			}
+		</script>
+
+		<script>
+            // if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+            var renderer, scene, camera, stats;
+
+            var gui = null;
+            var animation_playing = false;
+            // measure time with frame
+            var frameCount = 0;
+            var ballSpeed = 1/30;
+            var ballSpeedMax = 1/10;
+            var a_max = a*2;
+            var b_max = b*2;
+            var c_max = c*2;
+            var d_max = d*2;
+
+            init();
+            animate();
+
+            function init() {
+                camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+                camera.position.y = -9;
+                camera.position.z = 4;
+                scene = new THREE.Scene();
+                var directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
+                directionalLight.position.set( 0, -20, 20 );
+                scene.add( directionalLight );
+
+                renderer = new THREE.WebGLRenderer();
+                renderer.setClearColor( 0xCCCCCC );
+                renderer.setPixelRatio( window.devicePixelRatio );
+                renderer.setSize( window.innerWidth, window.innerHeight );
+
+                var controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls.enableRotate = false;
+                controls.minDistance = 1;
+                controls.maxDistance = 100;
+
+                var container = document.getElementById( 'container' );
+                container.appendChild( renderer.domElement );
+
+                stats = new Stats();
+                container.appendChild( stats.dom );
+                window.addEventListener( 'resize', onWindowResize, false );
+
+                produceMeshGroup();
+                scene.add(group);
+
+                gui = new Gui();
+
+
+                window.addEventListener( 'start-animation', onStartAnimation );
+                window.addEventListener( 'pause-animation', onPauseAnimation );
+                window.addEventListener( 'reset-animation', onResetAnimation );
+                window.addEventListener( 'value-a-change', onValueAChange );
+                window.addEventListener( 'value-b-change', onValueBChange );
+                window.addEventListener( 'value-c-change', onValueCChange );
+                window.addEventListener( 'value-d-change', onValueDChange );
+                window.addEventListener( 'speed-change', onSpeedChange );
+                window.addEventListener( 'start-x-change', onStartXChange );
+                window.addEventListener( 'toggle-wire-frame', onToggleWireFrame );
+                window.addEventListener( 'keypress', onKeyPress );
+
+            }
+
+            function onWindowResize() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize( window.innerWidth, window.innerHeight );
+            }
+
+            function onStartAnimation() {
+				animation_playing = true;
+            }
+
+            function onPauseAnimation() {
+                animation_playing = false;
+            }
+
+            function onResetAnimation() {
+                frameCount = 0;
+                updateAll(0);
+                animation_playing = false;
+            }
+
+            function onValueAChange( event ) {
+				sleep = event.detail.value;
+                updateAll(sx);
+            }
+
+            function onValueBChange( event ) {
+                calories = event.detail.value;
+                updateAll(sx);
+            }
+
+            function onValueCChange( event ) {
+                steps = event.detail.value;
+                updateAll(sx);
+            }
+
+            function onValueDChange( event ) {
+                d = event.detail.value * d_max;
+                updateAll(sx);
+            }
+
+            function onSpeedChange( event ) {
+                ballSpeed = event.detail.value;
+                updateAll(sx);
+            }
+
+            function onStartXChange( event ) {
+				sx = event.detail.value * grid;
+				updateAll(sx);
+            }
+
+            function onKeyPress ( event ) {
+                if (event.keyCode == 100) {
+                    sx += 2;
+				} else if (event.keyCode == 97) {
+                    sx -= 2;
+				}
+				updateAll(sx);
+			}
+
+            function onToggleWireFrame( event ) {
+				wireFrameOn = event.detail.shouldShow;
+				scene.remove(group);
+				produceMeshGroup();
+				scene.add(group);
+				updateAll(sx);
+            }
+
+            function animate() {
+                requestAnimationFrame( animate );
+                render();
+                stats.update();
+            }
+
+            function render() {
+                if (animation_playing) {
+                    frameCount += 1;
+                    updateAll(frameCount/20*ballSpeed);
+				}
+                renderer.render( scene, camera );
+            }
+
+		</script>
+	</body>
+</html>
