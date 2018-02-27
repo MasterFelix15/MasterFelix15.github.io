@@ -17,9 +17,16 @@
 <body>
 
 <a-scene>
+	
+	 <a-entity id="plane" class="geometry"
+              geometry="primitive: circle; radius: 20"
+              rotation="-90 0 0"
+              material="side: double; color: blue"
+    </a-entity>
 
-	<a-entity hand-controls="left" aabb-collider="objects: .plot;" grab></a-entity>
-	<a-entity hand-controls="right" aabb-collider="objects: .plot;" grab></a-entity>
+
+	<a-entity hand-controls="left" aabb-collider="objects: .plot;"></a-entity>
+	<a-entity hand-controls="right" aabb-collider="objects: .plot;"></a-entity>
 
 	<a-entity
         id="camera"
@@ -29,10 +36,10 @@
         mouse-cursor="">
     </a-entity>
 
-	<a-scatterplot class="plot" id="plot1" raw="" src="url(sample-data/data2.json)" x="age" y="val" z="year" val="demog" fillval="1, 8" relationship="none"  position="0 0 0" rotation="0 0 0" scale="5 5 5" pointsize="3.5" colorpreset='jet' title="Singaporean population 1960-2017 by Age, Gender and Race"></a-scatterplot>
+	<!-- <a-scatterplot class="plot" id="plot1" raw="" src="url(sample-data/data2.json)" x="age" y="val" z="year" val="demog" fillval="1, 8" relationship="none"  position="0 0 0" rotation="0 0 0" scale="5 5 5" pointsize="3.5" colorpreset='jet' title="Singaporean population 1960-2017 by Age, Gender and Race"></a-scatterplot> -->
 
 	
-	<a-sky></a-sky>
+	<a-sky color="#6EBAA7" radius="20"></a-sky>
 </a-scene>
 </body>
 </html>
