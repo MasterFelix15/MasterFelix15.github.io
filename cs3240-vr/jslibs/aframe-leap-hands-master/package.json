@@ -1,0 +1,45 @@
+{
+  "name": "aframe-leap-hands",
+  "version": "0.7.2",
+  "description": "Leap Motion components for A-Frame VR",
+  "main": "index.js",
+  "scripts": {
+    "dev": "budo examples/index.js:examples/budo.js --port 8000",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist": "webpack browser.js dist/aframe-leap-hands.js && webpack -p browser.js dist/aframe-leap-hands.min.js",
+    "version": "npm run dist && git add -A dist",
+    "postversion": "git push && git push --tags && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donmccurdy/aframe-leap-hands.git"
+  },
+  "keywords": [
+    "aframe",
+    "aframevr",
+    "leap",
+    "leapmotion",
+    "vr",
+    "hand"
+  ],
+  "author": "Don McCurdy <dm@donmccurdy.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/donmccurdy/aframe-leap-hands/issues"
+  },
+  "homepage": "https://github.com/donmccurdy/aframe-leap-hands#readme",
+  "dependencies": {
+    "circular-array": "0.0.1",
+    "leapjs": "^0.6.4"
+  },
+  "devDependencies": {
+    "aframe": "^0.7.1",
+    "aframe-extras": "^3.13.1",
+    "browserify": "^14.1.0",
+    "budo": "^9.4.7",
+    "webpack": "^2.2.1"
+  },
+  "peerDependencies": {
+    "aframe": "^0.7.1"
+  }
+}
