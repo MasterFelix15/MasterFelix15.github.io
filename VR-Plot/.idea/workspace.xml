@@ -14,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="62" lean-forward="false" selection-start-line="29" selection-start-column="62" selection-end-line="29" selection-end-column="62" />
+            <state relative-caret-position="450">
+              <caret line="30" column="131" lean-forward="false" selection-start-line="30" selection-start-column="127" selection-end-line="30" selection-end-column="131" />
               <folding />
             </state>
           </provider>
@@ -46,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="zoom.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="zoom.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/zoom.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+            <state relative-caret-position="690">
+              <caret line="46" column="3" lean-forward="true" selection-start-line="46" selection-start-column="3" selection-end-line="46" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -105,8 +105,8 @@
         <option value="$PROJECT_DIR$/components/grab.js" />
         <option value="$PROJECT_DIR$/components/spinnable.js" />
         <option value="$PROJECT_DIR$/components/spin.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/components/zoom.js" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -192,12 +192,12 @@
       <option name="presentableId" value="Default" />
       <updated>1520914734875</updated>
       <workItem from="1520914737241" duration="618000" />
-      <workItem from="1520925114303" duration="6161000" />
+      <workItem from="1520925114303" duration="7098000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6779000" />
+    <option name="totallyTimeSpent" value="7716000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -285,18 +285,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/components/zoom.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="62" lean-forward="false" selection-start-line="29" selection-start-column="62" selection-end-line="29" selection-end-column="62" />
+        <state relative-caret-position="690">
+          <caret line="46" column="3" lean-forward="true" selection-start-line="46" selection-start-column="3" selection-end-line="46" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/zoom.js">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+        <state relative-caret-position="450">
+          <caret line="30" column="131" lean-forward="false" selection-start-line="30" selection-start-column="127" selection-end-line="30" selection-end-column="131" />
           <folding />
         </state>
       </provider>
