@@ -17,7 +17,6 @@ AFRAME.registerComponent('zoom', {
     },
 
     onKeydown: function (evt) {
-        console.log(evt.keyCode);
         if (evt.keyCode == 190) { // spin left
             this.el.addState(this.ZOOM_IN_STATE);
         }
