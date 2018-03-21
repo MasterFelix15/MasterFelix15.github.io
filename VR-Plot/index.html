@@ -22,9 +22,50 @@
                  material="color: #F2E646; transparent: true; opacity: 0.2"></a-mixin>
         <a-mixin id="cube-grabbed"
                  material="color: #F2E646; transparent: true; opacity: 0.2"></a-mixin>
+
+        <a-mixin id="button"
+                 geometry="primitive: box; height: 1; width: 1; depth: 2"
+                 material="color: #EF2D5E; transparent: true; opacity: 1"></a-mixin>
+        <a-mixin id="button-collided"
+                 material="color: #F2E646; transparent: true; opacity: 0.8"></a-mixin>
+        <a-mixin id="button-grabbed"
+                 material="color: #F2E646; transparent: true; opacity: 0.8"></a-mixin>
     </a-assets>
     <!-- Hands -->
-    <a-entity hand-controls="left" aabb-collider="objects: .cube;" grab></a-entity>
+    <a-entity hand-controls="left" aabb-collider="objects: .cube, .button;" grab>
+        <a-entity position="0 0 0.3"
+                  scale="0.01 0.01 0.005"
+                  rotation="0 0 -90"
+                  obj-model="obj: url(assets/Plasmacannon/plasma cannon.obj)"
+                  material="color: #666666; transparent: true; opacity: 0.8">
+            <a-entity class="button" mixin="button"
+                      position="-4.3 3.7 -28.4"
+                      rotation="0 0 52"
+                      scale="2 2 4"></a-entity>
+            <a-entity class="button" mixin="button"
+                      position="-4.3 -3.7 -28.4"
+                      rotation="0 0 -52"
+                      scale="2 2 4"></a-entity>
+            <a-entity geometry="primitive: box; height: 8; width: 0.1; depth: 20"
+                      material="color: #99ddff; transparent: true; opacity: 0.7"
+                      position="-3.2 1.8 -8.8"
+                      rotation="0 0 -30">
+                <a-entity text="value: .> Hello World"
+                          position="-0.25 -0.15 -16"
+                          rotation="180 90 0"
+                          scale="50 25 25"></a-entity>
+            </a-entity>
+        </a-entity>
+        <!-- Left hand placeholder -->
+        <a-entity position="0 0 0.3"
+                  scale="0.01 0.01 0.005"
+                  rotation="10 90 0"
+                  obj-model="obj: url(assets/Hand_01.obj)"
+                  material="color: #ffe6cc">
+            </a-entity>
+        </a-entity>
+    </a-entity>
+
     <a-entity hand-controls="right" aabb-collider="objects: .cube;" grab></a-entity>
 
     <a-entity class="cube" mixin="cube" position="0 1 -2" spin zoom>
